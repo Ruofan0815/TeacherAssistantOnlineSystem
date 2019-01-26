@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-sm   navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <% if logged_in? %>
+              <li class="nav-item">
+                <%= link_to 'Home', root_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <% if current_user.admin? %>
+                  <%= link_to 'Students', users_path, class: "nav-link" %>
+                <% else %>
+                  <%= link_to 'Search Course', add_courses_path, class: "nav-link" %>
+                <% end %>
+              </li>
+              <!-- <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Actions
+              </a>
+              <div class="dropdown-menu sm-menu">
+                <a class="dropdown-item" href="#">service 2</a>
+                <a class="dropdown-item" href="#">service 3</a>
+              </div>
+            </li> -->
+            <li class="nav-item">
+              <%= link_to 'Course List', courses_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'My Schedule', user_path(current_user), class: "nav-link" %>
+            </li>
+             <!-- <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Dropdown link
+              </a>
+              <div class="dropdown-menu sm-menu">
+                <a class="dropdown-item" href="#">Link 1</a>
+                <a class="dropdown-item" href="#">Link 2</a>
+                <a class="dropdown-item" href="#">Link 3</a>
+                <a class="dropdown-item" href="#">Link 4</a>
+                <a class="dropdown-item" href="#">Link 5</a>
+                <a class="dropdown-item" href="#">Link 6</a>
+              </div>
+          </li> -->
+          <% end %>
+          </ul>
+          <div class="social-part">
+
+            <% if logged_in? %>
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <% if current_user.admin? %>
+                    <%= link_to '<i class="fa fa-user-circle" aria-hidden="true"> Your Profile (Admin)</i>'.html_safe, user_path(current_user), class: "nav-link" %>
+                  <% else %>
+                    <%= link_to '<i class="fa fa-user-circle" aria-hidden="true"> Your Profile</i>'.html_safe, user_path(current_user), class: "nav-link" %>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Log out', logout_path, method: :delete, class: "nav-link" %>
+                </li>
+              </ul>
+            <% else %>
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <%= link_to 'Sign In', login_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Sign Up', signup_path, class: "nav-link" %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      </nav>

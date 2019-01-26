@@ -1,0 +1,29 @@
+<div class="card text-center">
+  <%= form_tag add_teachers_path, method: :get do %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reorder_users.each do |t| %>
+              <% if !t.admin? %>
+                <tr>
+                  <td><%= check_box_tag "user#{t.id}", 'yes', @teacher_ids.include?(t.id) ? true : false, disabled: @conflict_users.include?(t.id) ? true : false %></td>
+                  <td><h3><%= content_tag( :span, "#{t.first_name} #{t.last_name}", :class=>'badge badge-light') %></h3></td>
+                  <td><h3><%= content_tag( :span, "#{t.email}", :class=>'badge badge-light badge_class') %></h3></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+          </table>
+
+          <%= hidden_field_tag 'token', "#{@course.id}" %>
+          <%= button_tag(type: :submit, class: "btn btn-sm btn-success submit-class") do %>
+            submit
+          <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,23 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course Number</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Section</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% obj.each_with_index do |takecourse, index| %>
+    <tr>
+      <td><%= index+1 %></td>
+      <td><%= takecourse.course_number %></td>
+      <td><%= takecourse.title %></td>
+      <td><%= takecourse.section %></td>
+      <td><%= link_to "Remove", user_path(@user), method: :delete,
+        data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

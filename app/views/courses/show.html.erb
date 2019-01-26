@@ -1,0 +1,38 @@
+
+<div class="card">
+  <div class="card-header">
+  <h2><%= @course.title %> Section: <%= @course.section %></h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <th>Day</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <% if @teachers.count > 0 %>
+          <th>Teacher Assistants</th>
+        <% end %>
+      </thead>
+      <tbody>
+        <% @course.classtimes.each do |ct| %>
+          <tr>
+            <td><%= ct.day %></td>
+            <td><%= ct.start %></td>
+            <td><%= ct.end %></td>
+            <% if @teachers.count > 0 %>
+              <td>
+                <% @teachers.each do |teacher| %>
+                  <%= link_to (teacher.last_name + " " + teacher.first_name), user_path(teacher), class:"btn btn-primary btn-sm" %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if current_user.admin? %>
+  <%= render 'teachers/adding' %>
+<% end %>

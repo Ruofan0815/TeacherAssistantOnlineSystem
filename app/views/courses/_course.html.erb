@@ -1,0 +1,50 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course:</th>
+      <th scope="col">Course Number:</th>
+      <th scope="col">Section:</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% obj.each do |course| %>
+      <tr>
+        <td><%= course.id %></td>
+        <td><%= course.title %></td>
+        <td><%= course.course_number %></td>
+        <td><%= course.section %></td>
+        <td><button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#<%="#{course.id}demo" %>"><i class="fa fa-eye" aria-hidden="true"></i></button>
+        <% if current_user.admin? %>
+          <%= link_to '<i class="fa fa-plus icon-class" aria-hidden="true"></i>'.html_safe, course_path(course) %>
+        <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div id="<%="#{course.id}demo"%>" class="collapse">
+            <div class="card card-body">
+              <table class="table table-striped">
+                <thead class="thead-light">
+                  <th>Day</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                </thead>
+                <tbody>
+                  <% course.classtimes.each do |ct| %>
+                    <tr>
+                      <td><%= ct.day %></td>
+                      <td><%= ct.start %></td>
+                      <td><%= ct.end %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

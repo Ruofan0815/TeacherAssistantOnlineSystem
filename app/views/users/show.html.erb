@@ -1,0 +1,64 @@
+<h1>User profile</h1>
+
+
+<div class="container-fluid padding">
+  <div class="card user_profile">
+    <h4><i class="fa fa-user-circle" aria-hidden="true"></i> Name: <%= @user.first_name %> <%= @user.last_name %></h4>
+    <h4><i class="fa fa-envelope" aria-hidden="true"></i> Email: <%= @user.email %></h4>
+  </div>
+
+</div>
+<% if !@user.admin? %>
+  <div class="container-fluid padding">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Course Number</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Section</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @takingCourses.each_with_index do |takecourse, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= takecourse.course_number %></td>
+          <td><%= takecourse.title %></td>
+          <td><%= takecourse.section %></td>
+          <td>
+            <%= link_to "view", course_path(takecourse), class: "btn btn-sm btn-info" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h3>TA's Classes schedule</h3>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Course Number</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Section</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @teachingCourses.each_with_index do |teachcourse, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= teachcourse.course_number %></td>
+          <td><%= teachcourse.title %></td>
+          <td><%= teachcourse.section %></td>
+          <td>
+            <%= link_to "view", course_path(teachcourse), class: "btn btn-sm btn-info" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>

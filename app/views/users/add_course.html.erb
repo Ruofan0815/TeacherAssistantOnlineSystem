@@ -1,0 +1,35 @@
+<%= render 'usercourse/lookup' %>
+<%if @takingCourses.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="3" class="page-header">
+          <h2>Courses You have selected</h2>
+        </th>
+      </tr>
+
+      <tr>
+        <th>Course Number</th>
+        <th>Course Title</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @takingCourses.each do |course| %>
+        <tr>
+          <td><%= course.course_number %></td>
+          <td><%= course.title %></td>
+          <td>
+            <%= link_to "Remove", removeTakeCourse_path(user: current_user, course: course, relationtype: "take"), method: :delete,
+              data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %>
+            <%= link_to "view", course_path(course), class: "btn btn-sm btn-info" %> 
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="row col-lg-12">
+    <p class="lead"> You don't have any courses!</p>
+  </div>
+<% end %>

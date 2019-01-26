@@ -1,0 +1,20 @@
+<div class="class" style="margin-bottom: 20px;">
+  <h3 align="center">add new course</h3>
+  <%= form_tag search_courses_path, remote: true, method: :get, id: "course-search-form" do %>
+    <div class="input-group col-md-12">
+      <%= text_field_tag :search_param, params[:search_param], placeholder: "Course Info", autofocus: true, class: "form-control py-2" %>
+      <span class="input-group-append">
+        <%= button_tag(type: :submit, class: "btn btn-outline-secondary") do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+        <!-- <button class="btn btn-outline-secondary" type="button">
+            <i class="fa fa-search"></i>
+        </button> -->
+      </span>
+          <!-- <input class="form-control py-2" type="search" id="example-search-input"> -->
+    </div>
+  <% end %>
+</div>
+<div id="results">
+  <%= render 'usercourse/result' %>
+</div>
